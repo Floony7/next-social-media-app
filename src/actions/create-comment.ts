@@ -1,6 +1,5 @@
-'use server';
+"use server";
 
 export async function createComment() {
-
-    // Todo: Revalidate post hsow page
-};
+  // Todo: Revalidate post hsow page
+}

@@ -10,7 +10,6 @@ export default async function Home() {
 
   return (
     <div className="w-4/6 mx-auto">
-      <Header />
       <form action={actions.signIn}>
         <Button type="submit" variant="default">
           Sign In

@@ -1,6 +1,5 @@
-'use server';
+"use server";
 
 export async function createTopic() {
-
-    // Revalidate homepage
-};
+  // Revalidate homepage
+}
