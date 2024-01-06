@@ -3,6 +3,7 @@ import * as actions from "@/actions";
 import { Input, Avatar, AvatarFallback, AvatarImage, Button } from "./index";
 import { auth } from "@/auth";
 import { ReactNode } from "react";
+import { getInitials } from "@/utils/utils";
 
 export default async function Header() {
   const session = await auth();
@@ -50,11 +51,15 @@ function NavLink({ href, children }: { href: string; children: ReactNode }) {
   );
 }
 
-function UserAvatar(props: { src: string | null | undefined }) {
+function UserAvatar(props: {
+  username?: string;
+  src: string | null | undefined;
+}) {
+  const initials = getInitials(props.username);
   return (
     <Avatar>
       {props.src ? <AvatarImage src={props.src} /> : null}
-      <AvatarFallback>CN</AvatarFallback>
+      <AvatarFallback>{props.username ? initials : "CN"}</AvatarFallback>
     </Avatar>
   );
 }
