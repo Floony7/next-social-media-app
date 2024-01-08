@@ -9,7 +9,7 @@ export default async function Home() {
   const session = await auth();
 
   return (
-    <div className="w-4/6 mx-auto">
+    <section>
       <form action={actions.signIn}>
         <Button type="submit" variant="default">
           Sign In
@@ -28,6 +28,6 @@ export default async function Home() {
       )}
 
       <Profile />
-    </div>
+    </section>
   );
 }

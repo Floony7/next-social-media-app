@@ -22,7 +22,7 @@ export default async function Header() {
 
   return (
     <nav
-      className="p-5 mb-3 shadow flex md:justify-between w-8/12 mx-auto"
+      className="p-5 mb-3 shadow flex md:justify-between mx-auto"
       style={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}
     >
       <div>

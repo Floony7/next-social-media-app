@@ -22,8 +22,10 @@ export default function RootLayout({
         <body
           className={`${inter.className} min-h-screen bg-gradient-to-r from-sky-500 to-indigo-500`}
         >
-          <Header />
-          {children}
+          <main className="w-full mx-auto lg:w-4/6">
+            <Header />
+            {children}
+          </main>
         </body>
       </html>
     </SessionProvider>
