@@ -1,33 +1,14 @@
-import * as actions from "@/actions";
-import { auth } from "@/auth";
-import { useSession } from "next-auth/react";
+import CreateTopicForm from "@/components/topics/create-topic-form";
 
-import { Button } from "@/components/ui/button";
-import Profile from "@/components/ui/profile";
-import Header from "@/components/ui/header";
-export default async function Home() {
-  const session = await auth();
-
+export default function Home() {
   return (
-    <section>
-      <form action={actions.signIn}>
-        <Button type="submit" variant="default">
-          Sign In
-        </Button>
-      </form>
-      <form className="mt-2" action={actions.signOut}>
-        <Button type="submit" variant="default">
-          Sign Out
-        </Button>
-      </form>
-
-      {session?.user ? (
-        <div>{JSON.stringify(session.user)}</div>
-      ) : (
-        <div>Signed Out</div>
-      )}
-
-      <Profile />
+    <section className="grid grid-cols-4 gap-4 p-4">
+      <div className="col-span-3">
+        <h1 className="text-xl m-2">Top Posts</h1>
+      </div>
+      <div>
+        <CreateTopicForm />
+      </div>
     </section>
   );
 }

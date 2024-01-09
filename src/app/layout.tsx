@@ -22,10 +22,13 @@ export default function RootLayout({
         <body
           className={`${inter.className} min-h-screen bg-gradient-to-r from-sky-500 to-indigo-500`}
         >
-          <main className="w-full mx-auto lg:w-4/6">
+          <header
+            className="w-full shadow"
+            style={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}
+          >
             <Header />
-            {children}
-          </main>
+          </header>
+          <main className="w-full mx-auto lg:w-4/6">{children}</main>
         </body>
       </html>
     </SessionProvider>
