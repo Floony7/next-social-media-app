@@ -14,3 +14,11 @@ export function getInitials(name?: string) {
           return `${capitalStr[0]}${lastWord}`;
       }  
   };
+
+  export function sanitizeTitle(text: string) {
+    const title = text.replace(/-/g, " ");
+    const charArray = title.split("");
+    const firstLetter = charArray.at(0)?.toUpperCase();
+    const remainingChars = charArray.slice(1).join("");
+    return `${firstLetter}${remainingChars}`;
+  }
