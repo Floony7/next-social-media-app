@@ -20,7 +20,7 @@ export default function RootLayout({
     <SessionProvider>
       <html lang="en">
         <body
-          className={`${inter.className} min-h-screen bg-gradient-to-r from-sky-500 to-indigo-500`}
+          className={`${inter.className} min-h-screen bg-gradient-to-r from-sky-500 to-indigo-500 text-white`}
         >
           <header
             className="w-full shadow"

@@ -14,34 +14,34 @@ import { Label } from "../ui/label";
 import { ReactNode } from "react";
 import { ErrorBox } from "../common/error-box";
 
-export default function CreateTopicForm() {
-  const [formState, action] = useFormState(actions.createTopic, { errors: {} });
+export default function CreatePostForm() {
+  const [formState, action] = useFormState(actions.createPost, { errors: {} });
   const { pending } = useFormStatus();
   return (
     <Popover>
       <PopoverTrigger className="w-full">
         <Button className="w-full" color="primary">
-          Create Topic
+          Create a Post
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto">
-        <h3 className="text-lg">Create a Topic</h3>
         <form action={action}>
           <div className="flex flex-col gap-4 p-4 w-80">
-            <Label htmlFor="name">Topic Name</Label>
-            <Input type="text" placeholder="Name" name="name" />
-            {formState.errors.name ? (
-              <ErrorBox>{formState.errors.name.join(", ")}</ErrorBox>
+            <h3>Create a Post</h3>
+
+            <Label htmlFor="title">Post Title</Label>
+            <Input type="text" name="title" placeholder="Add a post title" />
+            {formState.errors.title ? (
+              <ErrorBox>{formState.errors.title?.join(", ")}</ErrorBox>
             ) : null}
-            <Label htmlFor="description">Description</Label>
-            <Textarea
-              name="description"
-              placeholder="More about this topic..."
-            />
-            {formState.errors.name ? (
-              <ErrorBox>{formState.errors.name.join(", ")}</ErrorBox>
+            <Label htmlFor="description">Content</Label>
+            <Textarea name="content" placeholder="More about this topic..." />
+            {formState.errors.content ? (
+              <ErrorBox>{formState.errors.content?.join(", ")}</ErrorBox>
             ) : null}
-            {formState.errors._form?.join(", ")}
+            {formState.errors._form ? (
+              <ErrorBox>{formState.errors._form.join(", ")}</ErrorBox>
+            ) : null}
             <Button
               disabled={pending}
               className="bg-blue-700 text-white w-full"
@@ -53,12 +53,5 @@ export default function CreateTopicForm() {
         </form>
       </PopoverContent>
     </Popover>
-  );
-}
-function SubmitButton({ children }: { children: ReactNode }) {
-  return (
-    <Button type="submit" className="bg-blue-700 text-white">
-      {children}
-    </Button>
   );
 }
