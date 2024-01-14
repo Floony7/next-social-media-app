@@ -6,7 +6,9 @@ export default function Header() {
   return (
     <nav className="p-5 mb-3 w-full lg:w-4/6 flex md:justify-between mx-auto">
       <div>
-        <span className="cursor-pointer p-2 text-white">Logo</span>
+        <span className="p-2 text-white">
+          <Link href="/">Logo</Link>
+        </span>
       </div>
       <div>
         <ul className="w-auto flex items-center justify-evenly text-white">

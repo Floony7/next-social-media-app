@@ -9,8 +9,8 @@ import { db } from "@/db";
 import paths from "@/paths";
 
 const createPostSchema = z.object({
-  title: z.string().min(3),
-  content:z.string().min(10)
+  title: z.string().min(3, { message: "Title must be at least 3 characters long"}),
+  content: z.string().min(10, { message: "Content must be at least 10 characters long" })
 })
 
 interface CreatePostFormState {
@@ -21,11 +21,10 @@ interface CreatePostFormState {
   }
 }
 
-export async function createPost(formState: CreatePostFormState, formData: FormData): Promise<CreatePostFormState> {
-
+export async function createPost(slug: string, formState: CreatePostFormState, formData: FormData): Promise<CreatePostFormState> {
   const result = createPostSchema.safeParse({
-    name: formData.get('title'),
-    description: formData.get('content')
+    title: formData.get('title'),
+    content: formData.get('content')
   });
 
   if (!result.success) {
@@ -43,9 +42,46 @@ export async function createPost(formState: CreatePostFormState, formData: FormD
     }
   }
 
-  return {
-    errors: {}
+  const topic = await db.topic.findFirst({
+    where: { slug },
+  });
+
+  if (!topic) {
+    return {
+      errors: {
+        _form: ['Cannot find topic']
+      }
+    }
   }
+
+  let post: Post;
+  try {
+    post = await db.post.create({
+      data: {
+        title: result.data.title,
+      content: result.data.content,
+      userId: session.user.id,
+      topicId: topic.id
+      }
+    })
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      return {
+        errors: {
+          _form: [error.message]
+        }
+      }
+    } else {
+      return {
+        errors: {
+          _form: ['Failed to create post']
+        }
+      }
+    }
+  }
+
+  revalidatePath(paths.topicShow(slug));
+  redirect(paths.postShow(slug, post.id));
 
   // Revalidate topic show page
 }

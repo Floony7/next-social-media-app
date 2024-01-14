@@ -25,9 +25,9 @@ export default function CreateTopicForm() {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto">
-        <h3 className="text-lg">Create a Topic</h3>
         <form action={action}>
           <div className="flex flex-col gap-4 p-4 w-80">
+            <h3 className="font-bold text-lg">Create a Topic</h3>
             <Label htmlFor="name">Topic Name</Label>
             <Input type="text" placeholder="Name" name="name" />
             {formState.errors.name ? (

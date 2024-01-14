@@ -11,11 +11,13 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "../ui";
 import { Label } from "../ui/label";
-import { ReactNode } from "react";
 import { ErrorBox } from "../common/error-box";
 
-export default function CreatePostForm() {
-  const [formState, action] = useFormState(actions.createPost, { errors: {} });
+export default function CreatePostForm({ slug }: { slug: string }) {
+  const [formState, action] = useFormState(
+    actions.createPost.bind(null, slug),
+    { errors: {} }
+  );
   const { pending } = useFormStatus();
   return (
     <Popover>
@@ -27,14 +29,13 @@ export default function CreatePostForm() {
       <PopoverContent className="w-auto">
         <form action={action}>
           <div className="flex flex-col gap-4 p-4 w-80">
-            <h3>Create a Post</h3>
-
+            <h3 className="font-bold text-lg">Create Post</h3>
             <Label htmlFor="title">Post Title</Label>
             <Input type="text" name="title" placeholder="Add a post title" />
             {formState.errors.title ? (
               <ErrorBox>{formState.errors.title?.join(", ")}</ErrorBox>
             ) : null}
-            <Label htmlFor="description">Content</Label>
+            <Label htmlFor="content">Content</Label>
             <Textarea name="content" placeholder="More about this topic..." />
             {formState.errors.content ? (
               <ErrorBox>{formState.errors.content?.join(", ")}</ErrorBox>
@@ -47,7 +48,7 @@ export default function CreatePostForm() {
               className="bg-blue-700 text-white w-full"
               type="submit"
             >
-              {pending ? "Submitting..." : "Create Topic"}
+              {pending ? "Submitting..." : "Create Post"}
             </Button>
           </div>
         </form>

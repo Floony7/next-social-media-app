@@ -1,6 +1,6 @@
 import CreateTopicForm from "@/components/topics/create-topic-form";
 import TopicList from "@/components/topics/topic-list";
-import { Separator } from "@/components/ui/separator";
+// import { Separator } from "@/components/ui/separator";
 
 export default function Home() {
   return (
